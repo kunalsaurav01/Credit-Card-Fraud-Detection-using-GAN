@@ -1,0 +1,144 @@
+💳 Credit Card Fraud Detection using GAN
+
+This project addresses the extreme class imbalance problem in credit card fraud detection by using a Generative Adversarial Network (GAN) to generate realistic synthetic fraud transactions.
+Instead of duplicating rare fraud samples (like SMOTE), the GAN learns the true fraud distribution and generates high-quality synthetic data.
+
+🚀 Project Motivation
+
+Credit card fraud datasets are highly imbalanced:
+
+Legitimate transactions ≈ 99.8%
+
+Fraud transactions ≈ 0.2%
+
+Traditional classifiers become biased toward the majority class.
+This project uses GANs to:
+
+Learn fraud transaction patterns
+
+Generate realistic synthetic fraud samples
+
+Improve downstream fraud detection performance
+
+🧠 Key Concept
+
+GANs generate new fraud samples instead of copying existing ones, reducing overfitting and improving generalization.
+
+🛠️ Tech Stack
+
+Python
+
+TensorFlow / Keras
+
+NumPy
+
+Pandas
+
+Scikit-learn
+
+Matplotlib
+
+📂 Dataset
+
+Dataset: creditcard.csv
+
+Source: Kaggle – Credit Card Fraud Detection Dataset
+
+Target Column: Class
+
+0 → Normal transaction
+
+1 → Fraud transaction
+
+🧪 Workflow
+
+Load and preprocess data
+
+Separate fraud and normal transactions
+
+Scale fraud features using StandardScaler
+
+Train GAN only on fraud data
+
+Generate synthetic fraud samples
+
+Combine synthetic fraud with real data
+
+Create a balanced dataset for classification
+
+🏗️ GAN Architecture
+Generator
+
+Dense(256) → LeakyReLU → BatchNorm
+
+Dense(128) → LeakyReLU → BatchNorm
+
+Dense(input_dim) → tanh
+
+Discriminator
+
+Dense(256) → LeakyReLU → Dropout
+
+Dense(128) → LeakyReLU → Dropout
+
+Dense(1) → sigmoid
+
+⚙️ Training Details
+
+Loss Function: Binary Cross-Entropy
+
+Optimizers: Adam
+
+Label Smoothing: Applied
+
+Training Type: Custom training loop
+
+Epochs: 10,000 (early stopping enabled)
+
+📊 Sample Training Output
+Epoch 0     | D Loss: 8.92 | G Loss: 0.70
+Epoch 1000  | D Loss: 1.91 | G Loss: 0.99
+Epoch 5000  | D Loss: 1.78 | G Loss: 0.93
+Epoch 9000  | D Loss: 1.49 | G Loss: 0.97
+
+
+✔ Indicates stable GAN convergence
+
+📈 Output
+
+Synthetic fraud transactions generated
+
+Balanced dataset created
+
+Ready for training fraud detection classifiers (Logistic Regression, XGBoost, Neural Networks, etc.)
+
+▶️ How to Run
+1️⃣ Install dependencies
+pip install tensorflow pandas numpy scikit-learn matplotlib
+
+2️⃣ Place dataset
+project/
+│── creditcard.csv
+│── fraud_gan.ipynb
+│── README.md
+
+3️⃣ Run Jupyter Notebook
+jupyter notebook
+
+
+Open and run all cells in fraud_gan.ipynb.
+
+📌 Results & Benefits
+
+✔ Handles extreme class imbalance
+✔ Generates realistic fraud patterns
+✔ Reduces overfitting
+✔ Better than SMOTE for complex fraud distributions
+
+⚠️ Limitations
+
+GAN training is computationally expensive
+
+Generated samples should be validated statistically
+
+Requires downstream classifier evaluation (ROC-AUC, PR-AUC)
